@@ -32,7 +32,7 @@ namespace TPL
 
         #region Custom Methods
 
-        private static void GetThreadType()
+        public static void GetThreadType()
         {
             Console.WriteLine("I'm a {0} thread",
                 Thread.CurrentThread.IsThreadPoolThread ? "Thread Pool" :
