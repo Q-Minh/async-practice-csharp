@@ -12,42 +12,65 @@ namespace TPL
 
         #region Test Cases
 
+        public static void RunTest()
+        {
+            try {
+                DownloadWebsites();
+            }
+            catch (AggregateException a) {
+                foreach (Exception e in a.Flatten().InnerExceptions)
+                    Console.WriteLine(e.Message);
+            }
+        }
+
+        #endregion
+
+        #region Custom Methods
+
         /// <summary>
         /// Requests three websites: a google page, a stackoverflow page, and nfl.com page.
         /// Writes the three html texts in a web-requests.html file created 
         /// or appended to two directories above directory containing executable.
         /// </summary>
-        public static void RunTest()
+        /// <exception cref="AggregateException"></exception>
+        private static void DownloadWebsites()
         {
             Stopwatch s = new Stopwatch();
             s.Start();
 
             Console.WriteLine("Sending web request ");
 
-            Task<string> downloadTask = 
+            Task<string> downloadTask =
                 DownloadWebPageAsync("https://www.google.ca/");
-            Task<string> downloadTask2 = 
+            Task<string> downloadTask2 =
                 DownloadWebPageAsync("https://stackoverflow.com/questions/2099947/simple-description-of-worker-and-i-o-threads-in-net");
-            Task<string> downloadTask3 = 
+            Task<string> downloadTask3 =
                 DownloadWebPageAsync("https://www.nfl.com/");
 
-            while (!downloadTask.IsCompleted && !downloadTask2.IsCompleted && !downloadTask3.IsCompleted) 
-            {
+            while (!downloadTask.IsCompleted && !downloadTask2.IsCompleted && !downloadTask3.IsCompleted) {
                 Console.Write(".");
                 Thread.Sleep(250);
             }
+
+            if (downloadTask.Exception != null)
+                throw downloadTask.Exception;
+            if (downloadTask2.Exception != null)
+                throw downloadTask2.Exception;
+            if (downloadTask3.Exception != null)
+                throw downloadTask3.Exception;
+
             Console.WriteLine();
+            try {
+                System.IO.File.WriteAllText("../../web-requests.html", "\n\nGoogle :\n" + downloadTask.Result);
+                System.IO.File.AppendAllText("../../web-requests.html", "\n\nStackOverflow question :\n" + downloadTask2.Result);
+                System.IO.File.AppendAllText("../../web-requests.html", "\n\nNFL website :\n" + downloadTask3.Result);
+            }
+            catch (Exception e) {
+                Console.WriteLine("Write operation to file malfunctioned.");
+            }
 
-            System.IO.File.WriteAllText("../../web-requests.html", "\n\nGoogle :\n" + downloadTask.Result);
-            System.IO.File.AppendAllText("../../web-requests.html", "\n\nStackOverflow question :\n" + downloadTask2.Result);
-            System.IO.File.AppendAllText("../../web-requests.html", "\n\nNFL website :\n" + downloadTask3.Result);
-
-            Console.WriteLine("Received and output request in " + s.Elapsed);
+            Console.WriteLine("Received request and created '../../web-requests.html' in " + s.Elapsed);
         }
-
-        #endregion
-
-        #region Custom Methods
 
         /// <summary>
         /// This method creates a first thread to begin requesting a web page and
@@ -83,7 +106,7 @@ namespace TPL
                         }
                     }
                 });
-
+            
             return downloadTask;
         }
 

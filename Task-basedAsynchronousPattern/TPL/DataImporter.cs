@@ -27,13 +27,22 @@ namespace TPL
             //Task t4 = Task.Factory.StartNew(() => Console.WriteLine(dir + " : " + _count++));
             //Task t5 = Task.Factory.StartNew(() => Console.WriteLine(dir2 + " : " + _count++));
             //Task t6 = Task.Factory.StartNew(() => Console.WriteLine(dir3 + " : " + _count++));
+            try {
+                t1.Wait();
+                t2.Wait();
+                t3.Wait();
+                //t4.Wait();
+                //t5.Wait();
+                //t6.Wait();
+            }
+            catch (AggregateException a) {
+                foreach (Exception e in a.Flatten().InnerExceptions) 
+                    Console.WriteLine(e.Message);
+            }
+            catch(ObjectDisposedException o) {
+                Console.WriteLine(String.Concat(o.Message, "\nInner exception : ", o.InnerException.Message));
+            }
 
-            t1.Wait();
-            t2.Wait();
-            t3.Wait();
-            //t4.Wait();
-            //t5.Wait();
-            //t6.Wait();
         }
 
         #endregion

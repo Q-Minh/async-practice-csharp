@@ -9,10 +9,16 @@ namespace TPL
     {
 
         #region Test Cases
-
+        
         public static void RunCombinationsTestAsync(uint numberOfOptions, uint numberOfChoices, TaskCreationOptions hint = TaskCreationOptions.None)
         {
-            ComputeCombinationAsync(numberOfOptions, numberOfChoices, hint);
+            try {
+                ComputeCombinationAsync(numberOfOptions, numberOfChoices, hint);
+            }
+            catch (AggregateException a) {
+                foreach (Exception e in a.Flatten().InnerExceptions) 
+                    Console.WriteLine(e.Message);
+            }
         }
 
         public static void RunCombinationsTest(uint numberOfOptions, uint numberOfChoices)
@@ -33,6 +39,7 @@ namespace TPL
         /// </summary>
         /// <param name="numberOfOptions"></param>
         /// <param name="numberOfChoices"></param>
+        /// <exception cref="AggregateException"></exception>
         private static void ComputeCombinationAsync(uint numberOfOptions, uint numberOfChoices, TaskCreationOptions hint)
         {
             Stopwatch s = new Stopwatch();

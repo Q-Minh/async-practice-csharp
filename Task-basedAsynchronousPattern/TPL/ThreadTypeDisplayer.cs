@@ -12,19 +12,30 @@ namespace TPL
 
         public static void RunTest(List<TaskCreationOptions> options = null)
         {
-            if(options != null)
-            {
-                List<Task> TaskList = new List<Task>();
-
-                foreach (TaskCreationOptions o in options)
+            try { 
+                if (options != null)
                 {
-                    TaskList.Add(Task.Factory.StartNew(GetThreadType, o));
-                }
+                    List<Task> TaskList = new List<Task>();
 
-                foreach (Task t in TaskList)
-                {
-                    t.Wait();
+                    foreach (TaskCreationOptions o in options)
+                    {
+                        TaskList.Add(Task.Factory.StartNew(GetThreadType, o));
+                    }
+
+                    foreach (Task t in TaskList)
+                    {
+                        t.Wait();
+                    }
                 }
+            }
+            catch(AggregateException a) {
+                foreach (Exception e in a.Flatten().InnerExceptions)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+            catch(ObjectDisposedException o) {
+                Console.WriteLine(String.Concat(o.Message, "\nInner exception : ", o.InnerException.Message));
             }
         }
 
