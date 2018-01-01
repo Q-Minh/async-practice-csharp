@@ -43,7 +43,8 @@ namespace TPL
 
         #region Fields
 
-        private static int _count = 0;
+        //Unneeded for the moment
+        //private static int _count = 0;
 
         #endregion
     }

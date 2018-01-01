@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace TaskbasedAsynchronousPattern
 {
@@ -25,8 +20,8 @@ namespace TaskbasedAsynchronousPattern
 
             //Long running option uses a background thread. I think it is slower than
             //foreground thread.
-            TPL.Computation.RunCombinationsTestAsync(60000, 600/*, TaskCreationOptions.LongRunning*/);
-            TPL.Computation.RunCombinationsTest(60000, 600);
+            TPL.Computation.RunCombinationsTestAsync(49000, 600/*, TaskCreationOptions.LongRunning*/);
+            TPL.Computation.RunCombinationsTest(49000, 600);
 
             Console.WriteLine("All Done");
             Console.ReadKey();

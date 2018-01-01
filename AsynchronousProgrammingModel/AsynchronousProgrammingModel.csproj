@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C8E0D5C7-A361-4C4C-AC40-8B8068A0CABE}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>AsynchronousProgrammingPractice</RootNamespace>
-    <AssemblyName>AsynchronousProgrammingPractice</AssemblyName>
+    <RootNamespace>AsynchronousProgrammingModel</RootNamespace>
+    <AssemblyName>AsynchronousProgrammingModel</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
