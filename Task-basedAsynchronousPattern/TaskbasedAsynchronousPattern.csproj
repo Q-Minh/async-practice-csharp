@@ -46,6 +46,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TAP\TAP.cs" />
+    <Compile Include="TPL\AsyncIO.cs" />
     <Compile Include="TPL\Computation.cs" />
     <Compile Include="TPL\DataImporter.cs" />
     <Compile Include="TPL\ThreadTypeDisplayer.cs" />
