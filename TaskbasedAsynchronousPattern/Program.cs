@@ -23,7 +23,9 @@ namespace TaskbasedAsynchronousPattern
             //TPL.Computation.RunCombinationsTestAsync(49000, 600/*, TaskCreationOptions.LongRunning*/);
             //TPL.Computation.RunCombinationsTest(49000, 600);
 
-            TPL.AsyncIO.RunTest();
+            //TPL.AsyncIO.RunTest();
+
+            TPL.CancelTask.RunTest();
 
             Console.WriteLine("All Done");
             Console.ReadKey();

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskbasedAsynchronousPattern", "Task-basedAsynchronousPattern\TaskbasedAsynchronousPattern.csproj", "{201DFBCA-4080-4490-A5FC-77E6D478FF01}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsynchronousProgrammingModel", "AsynchronousProgrammingModel\AsynchronousProgrammingModel.csproj", "{C8E0D5C7-A361-4C4C-AC40-8B8068A0CABE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskbasedAsynchronousPattern", "TaskbasedAsynchronousPattern\TaskbasedAsynchronousPattern.csproj", "{201DFBCA-4080-4490-A5FC-77E6D478FF01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{201DFBCA-4080-4490-A5FC-77E6D478FF01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{201DFBCA-4080-4490-A5FC-77E6D478FF01}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{201DFBCA-4080-4490-A5FC-77E6D478FF01}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{201DFBCA-4080-4490-A5FC-77E6D478FF01}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C8E0D5C7-A361-4C4C-AC40-8B8068A0CABE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C8E0D5C7-A361-4C4C-AC40-8B8068A0CABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8E0D5C7-A361-4C4C-AC40-8B8068A0CABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8E0D5C7-A361-4C4C-AC40-8B8068A0CABE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{201DFBCA-4080-4490-A5FC-77E6D478FF01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{201DFBCA-4080-4490-A5FC-77E6D478FF01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{201DFBCA-4080-4490-A5FC-77E6D478FF01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{201DFBCA-4080-4490-A5FC-77E6D478FF01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
