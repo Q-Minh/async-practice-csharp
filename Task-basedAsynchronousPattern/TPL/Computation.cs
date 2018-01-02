@@ -16,8 +16,8 @@ namespace TPL
                 ComputeCombinationAsync(numberOfOptions, numberOfChoices, hint);
             }
             catch (AggregateException a) {
-                foreach (Exception e in a.Flatten().InnerExceptions) 
-                    Console.WriteLine(e.Message);
+                foreach (Exception e in a.Flatten().InnerExceptions)
+                    Console.WriteLine(String.Concat(e.GetType().Name, " : ", e.Message));
             }
         }
 
@@ -40,7 +40,8 @@ namespace TPL
         /// <param name="numberOfOptions"></param>
         /// <param name="numberOfChoices"></param>
         /// <exception cref="AggregateException"></exception>
-        private static void ComputeCombinationAsync(uint numberOfOptions, uint numberOfChoices, TaskCreationOptions hint)
+        private static void ComputeCombinationAsync(uint numberOfOptions, 
+            uint numberOfChoices, TaskCreationOptions hint)
         {
             Stopwatch s = new Stopwatch();
             s.Start();

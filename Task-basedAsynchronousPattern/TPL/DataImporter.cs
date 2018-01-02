@@ -36,11 +36,12 @@ namespace TPL
                 //t6.Wait();
             }
             catch (AggregateException a) {
-                foreach (Exception e in a.Flatten().InnerExceptions) 
-                    Console.WriteLine(e.Message);
+                foreach (Exception e in a.Flatten().InnerExceptions)
+                    Console.WriteLine(String.Concat(e.GetType().Name, " : ", e.Message));
             }
             catch(ObjectDisposedException o) {
-                Console.WriteLine(String.Concat(o.Message, "\nInner exception : ", o.InnerException.Message));
+                Console.WriteLine(String.Concat(o.GetType().Name, 
+                    " : ", o.Message, "\nInner exception : ", o.InnerException.Message));
             }
 
         }

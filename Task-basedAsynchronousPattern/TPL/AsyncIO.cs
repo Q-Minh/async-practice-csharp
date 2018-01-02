@@ -19,7 +19,7 @@ namespace TPL
             }
             catch (AggregateException a) {
                 foreach (Exception e in a.Flatten().InnerExceptions)
-                    Console.WriteLine(e.Message);
+                    Console.WriteLine(String.Concat(e.GetType().Name, " : ", e.Message));
             }
         }
 
