@@ -25,7 +25,9 @@ namespace TaskbasedAsynchronousPattern
 
             //TPL.AsyncIO.RunTest();
 
-            TPL.CancelTask.RunTest();
+            //TPL.CancelTask.RunTest();
+
+            TPL.TaskRelationships.RunChainedTaskTest();
 
             Console.WriteLine("All Done");
             Console.ReadKey();
