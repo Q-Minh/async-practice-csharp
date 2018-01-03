@@ -50,6 +50,7 @@
     <Compile Include="TPL\CancelTask.cs" />
     <Compile Include="TPL\Computation.cs" />
     <Compile Include="TPL\DataImporter.cs" />
+    <Compile Include="TPL\TaskRelationships.cs" />
     <Compile Include="TPL\ThreadTypeDisplayer.cs" />
   </ItemGroup>
   <ItemGroup>
