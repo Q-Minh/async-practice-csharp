@@ -46,7 +46,7 @@ namespace TPL
             Task<int> firstTask = Task.Factory
                      .StartNew<int>(() => { Console.WriteLine("First Task"); return 42; });
 
-            Task secondTask = firstTask.ContinueWith(result => Console.WriteLine("Processed " + result),
+            Task secondTask = firstTask.ContinueWith(ft => Console.WriteLine("Processed " + ft.Result),
                                 TaskContinuationOptions.OnlyOnRanToCompletion);
 
             Task errorHandler = firstTask.ContinueWith(st => Console.WriteLine(st.Exception),
