@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace TPL
@@ -12,6 +14,9 @@ namespace TPL
             SimpleContinuation();
 
             TwoConditionalContinuation();
+
+            Task<string> ioTask = SimpleContinuationIO("https://www.google.ca/");
+            Console.WriteLine(ioTask.Result);
         }
 
         public static void RunNestedTaskTest()
@@ -23,6 +28,8 @@ namespace TPL
 
         #region Custom Methods
 
+        //Not very useful because this is compute-based. We could achieve the same
+        //functionality by running these tasks in the same function.
         private static void SimpleContinuation()
         {
             Task<int> firstTask = Task.Factory
@@ -46,6 +53,21 @@ namespace TPL
                                             TaskContinuationOptions.OnlyOnFaulted);
 
             secondTask.Wait();
+        }
+
+        //I/O based simple continuation
+        private static Task<string> SimpleContinuationIO(string url)
+        {
+            WebRequest request = WebRequest.Create(url);
+            Task<WebResponse> response = request.GetResponseAsync();
+
+            return response
+                 .ContinueWith<string>(grt =>
+                 {
+                     using (var reader = new StreamReader(grt.Result.GetResponseStream())) {
+                         return reader.ReadToEnd();
+                     }
+                 });
         }
 
         #endregion
