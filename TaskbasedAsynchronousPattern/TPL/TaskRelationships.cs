@@ -15,10 +15,7 @@ namespace TPL
             SimpleContinuation();
 
             TwoConditionalContinuation();
-        }
-
-        public static void RunNestedTaskTest()
-        {
+            
             Task<string> ioTask = SimpleContinuationIO("https://www.google.ca/");
             Console.WriteLine(ioTask.Result);
         }
