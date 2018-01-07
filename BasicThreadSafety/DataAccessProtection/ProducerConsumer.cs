@@ -27,18 +27,16 @@ namespace DataAccessProtection
 
             for (byte i = 0; i < _nproducers; ++i)
             {
-                Task.Factory.StartNew(() =>
+                Task.Run(() =>
                 {
                     try
                     {
-                        if (ctoken.IsCancellationRequested)
-                            Console.WriteLine("Cancellation requested");
-                        ctoken.ThrowIfCancellationRequested();
-                        Produce(_workload);
+                        Produce(_workload, ctoken);
                     }
                     catch (OperationCanceledException)
                     {
                         Console.WriteLine("Production closed");
+
                         //throw;
                     }
                 }, ctoken);
@@ -46,14 +44,11 @@ namespace DataAccessProtection
 
             for (byte i = 0; i < _nconsumers; ++i)
             {
-                Task.Factory.StartNew(() =>
+                Task.Run(() =>
                 {
                     try
                     {
-                        if (ctoken.IsCancellationRequested)
-                            Console.WriteLine("Cancellation requested");
-                        ctoken.ThrowIfCancellationRequested();
-                        Consume(_workload);
+                        Consume(_workload, ctoken);
                     }
                     catch (OperationCanceledException)
                     {
@@ -73,7 +68,7 @@ namespace DataAccessProtection
 
         #region Private Methods
 
-        private void Produce(object obj)
+        private void Produce(object obj, CancellationToken ctoken)
         {
             var queue = (Queue<int>)obj;
             var rnd = new Random();
@@ -82,6 +77,10 @@ namespace DataAccessProtection
             {
                 lock (queue)
                 {
+                    if (ctoken.IsCancellationRequested)
+                        Monitor.PulseAll(queue);
+                    ctoken.ThrowIfCancellationRequested();
+
                     queue.Enqueue(rnd.Next(100));
 
                     Monitor.Pulse(queue);
@@ -91,13 +90,13 @@ namespace DataAccessProtection
             }
         }
 
-        private void Consume(object obj)
+        private void Consume(object obj, CancellationToken ctoken)
         {
             var queue = (Queue<int>)obj;
+            int val;
 
             while (true)
             {
-                int val;
                 lock (queue)
                 {
                     //Theoretically, the Producer could reacquire the monitor before
@@ -109,6 +108,7 @@ namespace DataAccessProtection
                     while (queue.Count == 0)
                     {
                         Monitor.Wait(queue);
+                        ctoken.ThrowIfCancellationRequested();
                     }
 
                     val = queue.Dequeue();
@@ -121,7 +121,7 @@ namespace DataAccessProtection
         private static void ProcessValue(int val)
         {
             //Do something with val
-            Console.WriteLine(Thread.CurrentThread.Name + " consumed : " + val);
+            Console.WriteLine("Consumed : " + val);
         }
 
         #endregion
@@ -134,5 +134,6 @@ namespace DataAccessProtection
         private byte _nconsumers;
 
         #endregion
+
     }
 }
