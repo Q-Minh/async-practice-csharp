@@ -96,7 +96,7 @@ namespace TPL
             //thread pool thread.
             Task<string> downloadTask =
                 Task.Factory
-                .FromAsync<string>(ar, iar =>
+                .FromAsync<string>(ar, (iar) =>
                 {
                     using (WebResponse response = request.EndGetResponse(iar))
                     {

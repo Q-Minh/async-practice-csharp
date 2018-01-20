@@ -36,8 +36,6 @@ namespace DataAccessProtection
                     catch (OperationCanceledException)
                     {
                         Console.WriteLine("Production closed");
-
-                        //throw;
                     }
                 }, ctoken);
             }
@@ -53,7 +51,6 @@ namespace DataAccessProtection
                     catch (OperationCanceledException)
                     {
                         Console.WriteLine("Client finished");
-                        //throw;
                     }
                 }, ctoken);
             }
